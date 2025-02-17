@@ -1,0 +1,41 @@
+i {
+  position: fixed;
+  text-align: center;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #000;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.flex {
+  display: flex;
+}
+
+.vcenter {
+  align-items: center;
+  justify-content: center;
+}
+
+.height-100vh {
+  height: 100vh;
+}
+
+/* 导航栏 */
+.nav-top {
+  width: 100%;
+  height: 80px;
+}
+
+.margin-lr-hidden {
+  margin: 100px, 200px;
+}

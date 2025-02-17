@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolHub - 在线工具集合</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .nav-hidden {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-out;
+        }
+        .nav-visible {
+            transform: translateY(0);
+            transition: transform 0.3s ease-in;
+        }
+        .tool-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .tool-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-white shadow-md z-50 nav-hidden" id="mainNav">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-xl font-bold text-blue-600">ToolHub</a>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">首页</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">工具集</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">关于</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首屏内容 -->
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white">
+        <div class="text-center px-4">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">一站式在线工具平台</h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">高效、便捷、免费的在线工具集合，助力您的工作与学习</p>
+            <div class="animate-bounce mt-8">
+                <svg class="w-12 h-12 mx-auto text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工具集合区域 -->
+    <section class="py-20 px-4" id="tools">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 工具卡片示例 -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2l2 4m2-4l2-4m-6 4l-2-4m0 0l-2 4m2-4l2-4"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">JSON格式化</h3>
+                <p class="text-gray-600">专业的JSON数据格式化工具，支持语法高亮和格式验证</p>
+            </div>
+
+            <!-- 其他工具卡片（复制此结构添加更多工具） -->
+            <!-- 示例卡片2 -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Base64编码</h3>
+                <p class="text-gray-600">支持文本/文件的Base64编码与解码操作</p>
+            </div>
+
+            <!-- 示例卡片3 -->
+            <div class="tool-card bg-white rounded-xl shadow-md p-6">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">时间戳转换</h3>
+                <p class="text-gray-600">快速进行时间戳与日期格式的相互转换</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 导航栏显隐控制
+        let lastScroll = 0;
+        const nav = document.getElementById('mainNav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // 向下滚动超过100px显示导航栏
+            if (currentScroll > 100) {
+                nav.classList.remove('nav-hidden');
+                nav.classList.add('nav-visible');
+            } else {
+                nav.classList.remove('nav-visible');
+                nav.classList.add('nav-hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // 工具卡片滚动动画
+        const cards = document.querySelectorAll('.tool-card');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => observer.observe(card));
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
