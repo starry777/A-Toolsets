@@ -13,15 +13,24 @@
   <nav class="fixed nav-top">
     <div class="margin-lr-hidden">
       <div class="flex vcenter">
-        <a href="">A Toolsets</a>
+        <a href="" class="LOGO">A Toolsets</a>
         <div>
-          <a href=""></a>
-          <a href=""></a>
-          <a href=""></a>
+          <a href="">主页</a>
+          <a href="">工具</a>
+          <a href="">介绍</a>
         </div>
       </div>
     </div>
   </nav>
+  <div class="c"></div>
+
+  <script>
+    const nav = document.querySelector('.nav-top')
+    window.addEventListener('scroll', function () {
+      const n = document.documentElement.scrollTop
+      n > 10 ? nav.style.top = '0px' : nav.style.top = '-80px'
+    })
+  </script>
 </body>
 
 </html>
