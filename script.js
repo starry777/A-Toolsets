@@ -140,6 +140,7 @@ function showDetail(index) {
   document.body.classList.add('no-scroll');
   document.querySelector('.detail-overlay').classList.add('active');
   document.querySelector('.close-btn').classList.add('active');
+  document.querySelector('.mh').classList.add('active');
 }
 
 // 隐藏详情
@@ -147,6 +148,7 @@ function hideDetail() {
   document.body.classList.remove('no-scroll');
   document.querySelector('.detail-overlay').classList.remove('active');
   document.querySelector('.close-btn').classList.remove('active');
+  document.querySelector('.mh').classList.remove('active');
 }
 
 // // 点击处理
