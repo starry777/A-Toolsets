@@ -78,7 +78,7 @@ a {
   background-color: #fff;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
   font-size: 17px;
-  z-index: 98;
+  z-index: 99;
 }
 
 .margin-lr-hidden {
@@ -253,14 +253,18 @@ a {
 /* 详情面板容器 */
 .detail-overlay {
   position: fixed;
+  margin: 80px;
+  padding: 40px;
+  border: 1px solid #000;
+  border-radius: 25px;
   top: 81px; /* 导航栏高度 */
   left: 0;
   right: 0;
   bottom: 0;
   background: white;
-  transform: translateY(100%);
+  transform: translateY(150%);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
+  z-index: 97;
   overflow-y: auto; /* 启用垂直滚动 */
 }
 
@@ -274,35 +278,26 @@ a {
   min-height: calc(100% + 1px); /* 确保滚动触发 */
 }
 
-/* 导航栏样式 */
-.nav-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: white;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  z-index: 1001;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.nav-header.active {
-  opacity: 1;
-  visibility: visible;
-}
 
 .close-btn {
   font-size: 24px;
   cursor: pointer;
   background: none;
-  border: none;
-  padding: 10px;
+  /* background-color: #cccccc; */
+  border: 1px solid #000;
+  border-radius: 100%;
+  /* border: none; */
+  padding: 10px 17px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  transition: all .5s;
+  transform: rotate(0deg);
+  z-index: 98;
+}
+
+.close-btn.active {
+  transform: rotate(360deg);
 }
 
 /* 防止背景滚动 */

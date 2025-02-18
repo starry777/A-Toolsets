@@ -139,22 +139,22 @@ function showDetail(index) {
   
   document.body.classList.add('no-scroll');
   document.querySelector('.detail-overlay').classList.add('active');
-  document.querySelector('.nav-header').classList.add('active');
+  document.querySelector('.close-btn').classList.add('active');
 }
 
 // 隐藏详情
 function hideDetail() {
   document.body.classList.remove('no-scroll');
   document.querySelector('.detail-overlay').classList.remove('active');
-  document.querySelector('.nav-header').classList.remove('active');
+  document.querySelector('.close-btn').classList.remove('active');
 }
 
-// 点击处理
-function handleOverlayClick(e) {
-  if (e.target === document.querySelector('.detail-overlay')) {
-      hideDetail();
-  }
-}
+// // 点击处理
+// function handleOverlayClick(e) {
+//   if (e.target === document.querySelector('.detail-overlay')) {
+//       hideDetail();
+//   }
+// }
 
 // 初始化
 initCards();
