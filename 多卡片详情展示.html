@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多卡片详情展示</title>
+    <style>
+        /* 保持原有样式不变 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .detail-overlay {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .detail-overlay.active {
+            transform: translateY(0);
+        }
+
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-header.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* 新增详情内容样式 */
+        .detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .detail-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" id="cardContainer"></div>
+
+    <div class="nav-header">
+        <button class="close-btn" onclick="hideDetail()">×</button>
+    </div>
+
+    <div class="detail-overlay" onclick="handleOverlayClick(event)">
+        <div class="detail-content">
+            <!-- 动态内容将插入到这里 -->
+        </div>
+    </div>
+
+    <script>
+        // 卡片数据
+        const cardsData = [
+            {
+                title: "科技新闻",
+                preview: "最新人工智能突破",
+                content: `
+                    <h2>深度神经网络新突破</h2>
+                    <img src="https://picsum.photos/800/300?tech" class="detail-image">
+                    <p>研究人员近日宣布在卷积神经网络领域取得重大进展...</p>
+                    <ul>
+                        <li>训练速度提升40%</li>
+                        <li>能耗降低25%</li>
+                        <li>支持实时动态学习</li>
+                    </ul>
+                `
+            },
+            {
+                title: "旅游指南",
+                preview: "十大必去海岛推荐",
+                content: `
+                    <h2>2023最佳度假海岛</h2>
+                    <img src="https://picsum.photos/800/300?island" class="detail-image">
+                    <p>根据最新旅游杂志评选，这些海岛值得放入你的旅行清单：</p>
+                    <ol>
+                        <li>马尔代夫群岛</li>
+                        <li>大堡礁心形礁</li>
+                        <li>帕劳水母湖</li>
+                    </ol>
+                `
+            },
+            {
+                title: "美食课堂",
+                preview: "法式烘焙技巧",
+                content: `
+                    <h2>经典可颂制作教程</h2>
+                    <img src="https://picsum.photos/800/300?food" class="detail-image">
+                    <p>材料准备：</p>
+                    <ul>
+                        <li>高筋面粉 500g</li>
+                        <li>黄油 300g</li>
+                        <li>酵母 10g</li>
+                    </ul>
+                    <p>详细步骤...</p>
+                `
+            },
+            {
+                title: "健身指南",
+                preview: "家庭徒手训练计划",
+                content: `
+                    <h2>30天塑形计划</h2>
+                    <img src="https://picsum.photos/800/300?gym" class="detail-image">
+                    <p>每日训练安排：</p>
+                    <ul>
+                        <li>周一：核心训练</li>
+                        <li>周三：上肢力量</li>
+                        <li>周五：下肢爆发力</li>
+                    </ul>
+                    <p>注意事项...</p>
+                `
+            }
+        ];
+
+        // 动态生成卡片
+        function initCards() {
+            const container = document.getElementById('cardContainer');
+            cardsData.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerHTML = `
+                    <h3>${card.title}</h3>
+                    <p>${card.preview}</p>
+                `;
+                cardElement.onclick = () => showDetail(index);
+                container.appendChild(cardElement);
+            });
+        }
+
+        // 显示详情
+        function showDetail(index) {
+            const detailContent = document.querySelector('.detail-content');
+            detailContent.innerHTML = cardsData[index].content;
+            
+            document.body.classList.add('no-scroll');
+            document.querySelector('.detail-overlay').classList.add('active');
+            document.querySelector('.nav-header').classList.add('active');
+        }
+
+        // 隐藏详情（保持原有逻辑）
+        function hideDetail() {
+            document.body.classList.remove('no-scroll');
+            document.querySelector('.detail-overlay').classList.remove('active');
+            document.querySelector('.nav-header').classList.remove('active');
+        }
+
+        // 点击处理
+        function handleOverlayClick(e) {
+            if (e.target === document.querySelector('.detail-overlay')) {
+                hideDetail();
+            }
+        }
+
+        // 初始化
+        initCards();
+
+        // 触摸事件处理
+        document.querySelector('.detail-overlay').addEventListener('touchmove', function(e) {
+            e.stopPropagation();
+        }, { passive: false });
+    </script>
+</body>
+</html>

@@ -2,9 +2,11 @@ i {
   position: fixed;
   text-align: center;
   float: right;
+  display: grid;
 }
 
-body,html{
+body,
+html {
   scroll-behavior: smooth;
 }
 
@@ -24,11 +26,11 @@ body,html{
   z-index: 99;
 }
 
-.c{
+.c {
   height: 10000px;
 }
 
-a{
+a {
   text-decoration: none;
   color: #000;
 }
@@ -39,6 +41,10 @@ a{
 
 .fixed {
   position: fixed;
+}
+
+.grid {
+  display: grid;
 }
 
 .flex {
@@ -57,7 +63,7 @@ a{
 }
 
 /* 导航栏 */
-.LOGO{
+.LOGO {
   font-family: 华文琥珀;
   font-size: 30px;
 }
@@ -68,7 +74,7 @@ a{
   height: 80px;
   top: -80px;
   background-color: #fff;
-  box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
   font-size: 17px;
   z-index: 98;
 }
@@ -79,32 +85,32 @@ a{
 
 /* 首屏 */
 
-.screen{
+.screen {
   width: 100%;
   height: 1080px;
 }
 
-.screen-in h1{
+.screen-in h1 {
   text-align: center;
   position: relative;
   top: 400px;
   font-size: 50px;
 }
 
-.screen-in p{
+.screen-in p {
   text-align: center;
   position: relative;
   top: 410px;
   font-size: 20px;
 }
 
-.btn-box{
+.btn-box {
   position: relative;
   top: 450px;
   text-align: center;
 }
 
-.btn{
+.btn {
   padding: 20px 40px;
   padding-bottom: 21px;
   border-radius: 35px;
@@ -116,35 +122,71 @@ a{
   border: 2px solid #000;
 }
 
-.btn:hover{
+.btn:hover {
   background-color: #fff;
   color: #000;
 }
 
 
 /* 内容 */
-.nr{
+.nr {
   width: 100%;
   height: 800px;
   background-color: #ffffff;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
   /* border-radius: 100%; */
   color: #000000;
-  text-align: center;
-  font-size: 30px;
   position: relative;
   top: 200px;
   transition: ease .5s;
 }
 
 
-.card{
+.card {
+  /* width: 100%; */
+  /* border: 1px solid #0044ff; */
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+/* .cards {
+  height: 200px;
+  background-color: #d3d3d3;
+  border-radius: 25px;
+  transition: ease .3s;
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.cards:hover {
+  transform: scale(1.05);
+} */
+
+.cards{
+  height: 200px;
+  background-color: #ffffff;
+  border: 1px solid #b3b3b3;
+  border-radius: 25px;
+  transition: ease .3s;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8);
+  padding: 15px;
+}
+.cards:hover{
+  transform: translateY(-13px) scale(1.012);
+  box-shadow: 7px 11px 5px rgba(0, 0, 0, 0.3);
+}
+.cards:active{
+  transform: scale(0.9999);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.8);
+}
+
+
+.cards-tc{
   width: 100%;
-  height: 800px;
-  background-color: #000000;
-  border: 2px solid #000;
-  /* border-radius: 100%; */
-  color: #ffffff;
-  text-align: center;
-  font-size: 30px;
+  height: 1000px;
+  background-color: #8a8a8a;
+  transition: ease .3s;
+  position: fixed;
+  top: 1000px;
+  z-index: 100;
 }
