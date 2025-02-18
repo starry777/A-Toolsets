@@ -24,18 +24,20 @@
     </div>
   </nav>
   <div class="screen">
-      <div class="screen-in">
-        <div class="h-1">
-          <h1>一个工具集合</h1>
-          <p>真一个工具集合</p>
-          <div class="btn-box">
-            <a href="" class="btn">开始使用</a>
-          </div>
+    <div class="screen-in">
+      <div class="h-1">
+        <h1>一个工具集合</h1>
+        <p>真一个工具集合</p>
+        <div class="btn-box">
+          <a href="#NR"  class="btn">开始使用</a>
         </div>
       </div>
+    </div>
   </div>
-  <div class="nr"></div>
-  <div class="nrn"></div>
+  <div class="nr" id="NR">
+    <a ></a>
+    <div class="card"></div>
+  </div>
 
 
 
@@ -49,28 +51,35 @@
       n > 10 ? nav.style.top = '0px' : nav.style.top = '-80px'
     })
 
+    // const btn = document.querySelector('.btn');
+    // btn.addEventListener('click', function () {
+    //   window.scrollBy(0, 10); // 水平滚动0像素，垂直滚动20像素
+    // });
+
     // 内容区
-    const nr = document.querySelector('.nr')
-    const nrn = document.querySelector('.nrn')
-    window.addEventListener('scroll', function () {
-      const n = document.documentElement.scrollTop
-      if (n > 10) {
-        nr.style.top = '-900px'
-        nrn.style.top = '-1000px'
-        // nr.style.opacity = '1'
-        nr.style.borderRadius = '0%'
-      }else{
-        nr.style.top = '0px'
-        nrn.style.top = '-600px'
-        // nr.style.opacity = '0'
-        nr.style.borderRadius = '100%'
-      }
-    })
+    // const nr = document.querySelector('.nr')
+    // const nrn = document.querySelector('.nrn')
+    // window.addEventListener('scroll', function () {
+    //   const n = document.documentElement.scrollTop
+    //   if (n > 10) {
+    //     nr.style.top = '-900px'
+    //     nrn.style.top = '-1680px'
+    //     // nrn.style.opacity = '1'
+    //     nr.style.borderRadius = '0%'
+    //     nrn.style.borderRadius = '0%'
+    //   } else {
+    //     nr.style.top = '500px'
+    //     nrn.style.top = '1000px'
+    //     // nrn.style.opacity = '0'
+    //     nr.style.borderRadius = '100%'
+    //     nrn.style.borderRadius = '100%'
+    //   }
+    // })
 
 
     // 顶部滚动条
     const progressBar = document.querySelector('.top2');
-    
+
     window.addEventListener('scroll', () => {
       // 获取页面总高度和视口高度
       const documentHeight = Math.max(
@@ -81,19 +90,19 @@
         document.body.clientHeight,
         document.documentElement.clientHeight
       );
-      
+
       const windowHeight = window.innerHeight;
-      
+
       // 计算有效滚动高度
       const scrollableHeight = documentHeight - windowHeight;
-      
+
       // 获取当前滚动位置
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-      
+
       // 计算百分比（添加边界检查）
       let percentage = (currentScroll / scrollableHeight) * 100;
       percentage = Math.min(Math.max(percentage, 0), 100);  // 确保在 0-100 之间
-      
+
       progressBar.style.width = percentage + '%';
     });
   </script>
