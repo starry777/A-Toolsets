@@ -5,6 +5,8 @@ i {
   display: grid;
 }
 
+
+
 body,
 html {
   scroll-behavior: smooth;
@@ -189,4 +191,116 @@ a {
   position: fixed;
   top: 1000px;
   z-index: 100;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+} */
+
+
+.detail-overlay {
+  position: fixed;
+  top: 81px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  transform: translateY(100%);
+  transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.detail-overlay.active {
+  transform: translateY(0);
+}
+
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.nav-header.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.close-btn {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* 新增详情内容样式 */
+.detail-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.detail-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 20px 0;
 }

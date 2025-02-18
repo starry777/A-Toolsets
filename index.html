@@ -35,33 +35,44 @@
     </div>
   </div>
   <div class="nr" id="NR">
-    <div class="card grid">
-      <div class="cards">
+    <div class="card ">
+      <!-- <div class="cards">
         <div class="cards-nr">
           <h3>JSON格式化</h3>
           <p>专业的JSON数据格式化工具，支持语法高亮和格式验证</p>
         </div>
-      </div>
+      </div> -->
+      <div class="card grid " id="cardContainer"></div>
+      <!-- <div class="cards"></div>
       <div class="cards"></div>
       <div class="cards"></div>
       <div class="cards"></div>
       <div class="cards"></div>
-      <div class="cards"></div>
-      <div class="cards"></div>
-      <div class="cards"></div>
+      <div class="cards"></div> -->
     </div>
   </div>
 
-  <div class="cards-tc">
+  <!-- <div class="cards-tc">
     <div class="x-btn"></div>
     <a href="">JSON格式化</a>
-  </div>
+  </div> -->
 
+
+
+  <!-- <div class="card-container" id="cardContainer"></div> -->
+
+  <div class="detail-overlay" onclick="handleOverlayClick(event)">
+    <button class="close-btn" onclick="hideDetail()">×</button>
+    <div class="detail-content">
+      <!-- 动态内容将插入到这里 -->
+    </div>
+  </div>
 
 
   <div class="c"></div>
 
   <script src="script.js"></script>
+  <script src="Data.js"></script>
 </body>
 
 </html>
