@@ -149,8 +149,8 @@ a {
 .card {
   /* width: 100%; */
   /* border: 1px solid #0044ff; */
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 40px;
   padding: 40px;
 }
 

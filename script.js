@@ -80,37 +80,61 @@ addEventListener('click', function () {
 // 卡片数据
 const cardsData = [
   {
-      title: "科技新闻",
-      preview: "最新人工智能突破",
-      content: `
+    title: "科技新闻",
+    preview: "最新人工智能突破",
+    content: `
           <h2>深度神经网络新突破</h2>
           <div style="height:800px">纵向滚动测试内容...</div>
           <p style="color:red">← 请上下滑动查看内容</p>
       `
   },
   {
-      title: "旅游指南",
-      preview: "十大必去海岛推荐",
-      content: `
+    title: "旅游指南",
+    preview: "十大必去海岛推荐",
+    content: `
           <h2>2023最佳度假海岛</h2>
           <div style="height:1200px">更多详情内容...</div>
       `
   },
   {
-      title: "美食课堂",
-      preview: "法式烘焙技巧",
-      content: `
+    title: "美食课堂",
+    preview: "法式烘焙技巧",
+    content: `
           <h2>经典可颂制作教程</h2>
           <div style="height:1500px">烘焙步骤演示...</div>
       `
   },
   {
-      title: "健身指南",
-      preview: "家庭徒手训练计划",
-      content: `
+    title: "健身指南",
+    preview: "家庭徒手训练计划",
+    content: `
           <h2>30天塑形计划</h2>
           <div style="height:2000px">每日训练详情...</div>
       `
+  },
+  {
+    title: "美食课堂",
+    preview: "法式烘焙技巧",
+    content: `
+        <h2>经典可颂制作教程</h2>
+        <div style="height:1500px">烘焙步骤演示...</div>
+    `
+  },
+  {
+    title: "美食课堂",
+    preview: "法式烘焙技巧",
+    content: `
+      <h2>经典可颂制作教程</h2>
+      <div style="height:1500px">烘焙步骤演示...</div>
+  `
+  },
+  {
+    title: "美食课堂",
+    preview: "法式烘焙技巧",
+    content: `
+      <h2>经典可颂制作教程</h2>
+      <div style="height:1500px">烘焙步骤演示...</div>
+  `
   }
 ];
 
@@ -118,14 +142,14 @@ const cardsData = [
 function initCards() {
   const container = document.getElementById('cardContainer');
   cardsData.forEach((card, index) => {
-      const cardElement = document.createElement('div');
-      cardElement.className = 'cards';
-      cardElement.innerHTML = `
+    const cardElement = document.createElement('div');
+    cardElement.className = 'cards';
+    cardElement.innerHTML = `
           <h3>${card.title}</h3>
           <p>${card.preview}</p>
       `;
-      cardElement.onclick = () => showDetail(index);
-      container.appendChild(cardElement);
+    cardElement.onclick = () => showDetail(index);
+    container.appendChild(cardElement);
   });
 }
 
@@ -133,10 +157,10 @@ function initCards() {
 function showDetail(index) {
   const detailContent = document.querySelector('.detail-content');
   detailContent.innerHTML = cardsData[index].content;
-  
+
   // 确保每次打开滚动位置归零
   document.querySelector('.detail-overlay').scrollTop = 0;
-  
+
   document.body.classList.add('no-scroll');
   document.querySelector('.detail-overlay').classList.add('active');
   document.querySelector('.close-btn').classList.add('active');
@@ -174,8 +198,8 @@ overlay.addEventListener('touchmove', e => {
   const isScrollingUp = e.touches[0].clientY > startY;
   const isAtTop = overlay.scrollTop <= 0;
   const isAtBottom = overlay.scrollTop + overlay.clientHeight >= overlay.scrollHeight;
-  
+
   if ((isAtTop && isScrollingUp) || (isAtBottom && !isScrollingUp)) {
-      e.preventDefault();
+    e.preventDefault();
   }
 }, { passive: false });
