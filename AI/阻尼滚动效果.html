@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阻尼滚动效果</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        .scroll-container {
+            height: 100vh;
+            overflow: hidden;
+        }
+        .content {
+            padding: 20px;
+            transition: transform 0.05s linear;
+        }
+        .scrollbar {
+            position: fixed;
+            right: 5px;
+            top: 0;
+            height: 100vh;
+            width: 4px;
+            background: rgba(0,0,0,0.1);
+        }
+        .scrollbar-inner {
+            position: absolute;
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border-radius: 2px;
+            transition: transform 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-container">
+        <div class="content bg-gray-100">
+            <!-- 生成100个测试区块 -->
+            <script>
+                for(let i=0; i<100; i++) {
+                    document.write(`
+                        <div class="p-4 mb-4 bg-white rounded-lg shadow">
+                            <h2 class="text-xl font-bold mb-2">内容区块 ${i+1}</h2>
+                            <p class="text-gray-600">这是一个示例内容区块，用于演示阻尼滚动效果...</p>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+    </div>
+    <div class="scrollbar">
+        <div class="scrollbar-inner"></div>
+    </div>
+
+    <script>
+        (function() {
+            const container = document.querySelector('.scroll-container');
+            const content = document.querySelector('.content');
+            const scrollbarInner = document.querySelector('.scrollbar-inner');
+            
+            let currentScroll = 0;
+            let targetScroll = 0;
+            let velocity = 0;
+            let isScrolling = false;
+            let lastTouchY = 0;
+            let rafId = null;
+
+            // 滚动条更新
+            function updateScrollbar() {
+                const visibleHeight = container.clientHeight;
+                const totalHeight = content.clientHeight;
+                const scrollPercentage = currentScroll / (totalHeight - visibleHeight);
+                const thumbHeight = visibleHeight * (visibleHeight / totalHeight);
+                
+                scrollbarInner.style.height = `${thumbHeight}px`;
+                scrollbarInner.style.transform = `translateY(${scrollPercentage * (visibleHeight - thumbHeight)}px)`;
+            }
+
+            // 动画循环
+            function animate() {
+                const delta = targetScroll - currentScroll;
+                velocity = delta * 0.03; // 阻尼系数，数值越小阻尼越大
+                currentScroll += velocity;
+                
+                // 边界处理
+                const maxScroll = content.clientHeight - container.clientHeight;
+                currentScroll = Math.max(0, Math.min(currentScroll, maxScroll));
+                
+                content.style.transform = `translateY(-${currentScroll}px)`;
+                updateScrollbar();
+                
+                if (Math.abs(velocity) > 0.5) {
+                    rafId = requestAnimationFrame(animate);
+                } else {
+                    isScrolling = false;
+                }
+            }
+
+            // 鼠标滚轮事件
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                targetScroll += e.deltaY * 1.5; // 加速滚动
+                targetScroll = Math.max(0, Math.min(targetScroll, content.clientHeight - container.clientHeight));
+                
+                if (!isScrolling) {
+                    isScrolling = true;
+                    animate();
+                }
+            });
+
+            // 触摸事件处理
+            let touchStartY = 0;
+            container.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                lastTouchY = touchStartY;
+                cancelAnimationFrame(rafId);
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touchY = e.touches[0].clientY;
+                const deltaY = touchY - lastTouchY;
+                lastTouchY = touchY;
+                
+                targetScroll -= deltaY * 1.5; // 触摸滚动加速
+                targetScroll = Math.max(0, Math.min(targetScroll, content.clientHeight - container.clientHeight));
+                
+                if (!isScrolling) {
+                    isScrolling = true;
+                    animate();
+                }
+            });
+
+            // 初始化滚动条
+            updateScrollbar();
+        })();
+    </script>
+</body>
+</html>

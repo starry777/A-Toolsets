@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scroll with Momentum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 禁用默认滚动 */
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body>
+    <!-- 滚动内容容器 -->
+    <div class="scroll-container" id="scrollContainer">
+        <!-- 示例内容 -->
+        <div class="h-screen bg-blue-100 flex items-center justify-center text-4xl">Page 1</div>
+        <div class="h-screen bg-green-100 flex items-center justify-center text-4xl">Page 2</div>
+        <div class="h-screen bg-yellow-100 flex items-center justify-center text-4xl">Page 3</div>
+        <div class="h-screen bg-red-100 flex items-center justify-center text-4xl">Page 4</div>
+    </div>
+
+    <script>
+        (function() {
+            const container = document.getElementById('scrollContainer');
+            let currentScroll = 0;
+            let targetScroll = 0;
+            let animating = false;
+            const ease = 0.01; // 缓冲系数（0.1-0.9），数值越小阻力越大
+
+            // 更新滚动位置
+            function smoothScroll() {
+                // 计算差值
+                let diff = targetScroll - currentScroll;
+                
+                // 应用缓动效果
+                currentScroll += diff * ease;
+                
+                // 更新实际滚动位置
+                container.scrollTop = currentScroll;
+                
+                // 当差值足够小时停止动画
+                if (Math.abs(diff) > 0.5) {
+                    requestAnimationFrame(smoothScroll);
+                } else {
+                    animating = false;
+                }
+            }
+
+            // 监听滚轮事件
+            window.addEventListener('wheel', (e) => {
+                e.preventDefault(); // 阻止默认滚动
+                targetScroll += e.deltaY;
+                targetScroll = Math.max(0, Math.min(targetScroll, container.scrollHeight - container.clientHeight));
+                
+                if (!animating) {
+                    animating = true;
+                    requestAnimationFrame(smoothScroll);
+                }
+            }, { passive: false });
+
+            // 兼容移动端触摸事件（简单实现）
+            let touchStartY = 0;
+            container.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touchY = e.touches[0].clientY;
+                targetScroll += (touchStartY - touchY) * 4; // 增加移动系数
+                targetScroll = Math.max(0, Math.min(targetScroll, container.scrollHeight - container.clientHeight));
+                touchStartY = touchY;
+                
+                if (!animating) {
+                    animating = true;
+                    requestAnimationFrame(smoothScroll);
+                }
+            }, { passive: false });
+        })();
+    </script>
+</body>
+</html>

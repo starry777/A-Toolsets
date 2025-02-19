@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="">
   <div class="top2"></div>
   <!-- 导航栏 -->
   <nav class="fixed nav-top">
@@ -19,6 +20,7 @@
           <a href="">主页</a>
           <a href="">工具</a>
           <a href="">介绍</a>
+          
         </div>
       </div>
     </div>
@@ -34,7 +36,8 @@
       </div>
     </div>
   </div>
-  <div class="nr" id="NR">
+  <a id="NR" class="NR"></a>
+  <div class="nr">
     <div class="card ">
       <!-- <div class="cards">
         <div class="cards-nr">
@@ -64,9 +67,9 @@
   <div class="nav-header"></div>
 
 
-
+  <button class="close-btn" onclick="hideDetail()">×</button>
   <div class="detail-overlay" onclick="handleOverlayClick(event)">
-    <button class="close-btn" onclick="hideDetail()">×</button>
+
     <div class="detail-content">
       <!-- 动态内容将插入到这里 -->11111
     </div>
