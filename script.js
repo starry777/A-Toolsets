@@ -82,6 +82,7 @@ const cardsData = [
   {
     title: "科技新闻",
     preview: "最新人工智能突破",
+    imgs:"https://starrywebpic-1324480062.cos.ap-guangzhou.myqcloud.com/test/%E3%80%90%E7%90%B4%E8%91%89_%E8%8C%9C%E3%83%BB%E8%91%B5%E3%80%91%E8%8E%BA%E8%90%BD%E6%A2%85%E6%9E%9D%E3%80%90r-906%E3%80%912.png",
     content: `
           <h2>深度神经网络新突破</h2>
           <div style="height:800px">纵向滚动测试内容...</div>
@@ -91,6 +92,7 @@ const cardsData = [
   {
     title: "旅游指南",
     preview: "十大必去海岛推荐",
+    imgs:"https://starrywebpic-1324480062.cos.ap-guangzhou.myqcloud.com/test/QQ%E5%9B%BE%E7%89%8720230126114542.jpg",
     content: `
           <h2>2023最佳度假海岛</h2>
           <div style="height:1200px">更多详情内容...</div>
@@ -147,6 +149,9 @@ function initCards() {
     cardElement.innerHTML = `
           <h3>${card.title}</h3>
           <p>${card.preview}</p>
+          <div class="imgcard">
+            <img src="${card.imgs}"></img>
+          </div>
       `;
     cardElement.onclick = () => showDetail(index);
     container.appendChild(cardElement);
