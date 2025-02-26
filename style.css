@@ -203,6 +203,10 @@ a {
   z-index: 100;
 }
 
+.text-h3{
+  font-size: 25px;
+}
+
 
 .imgcard{
   width: 200px;
@@ -211,14 +215,17 @@ a {
   float: right;
   position: relative;
   top: -63px;
-  border-radius: 50%;
-  overflow: hidden;
-  transform: scale(0.7);
+  /* border-radius: 50%; */
+  /* overflow: hidden; */
+  /* transform: scale(0.7); */
 }
 
 .card img{
   float: right;
-  height: 100%;
+  transform: scale(1.5);
+  /* height: 100%; */
+  /* backdrop-filter: blur(0px); */
+  /* filter: blur(10px); */
   /* position: relative;
   top: -70px;
   left: 200px; */

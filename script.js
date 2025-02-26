@@ -147,7 +147,7 @@ function initCards() {
     const cardElement = document.createElement('div');
     cardElement.className = 'cards';
     cardElement.innerHTML = `
-          <h3>${card.title}</h3>
+          <h3 class="text-h3">${card.title}</h3>
           <p>${card.preview}</p>
           <div class="imgcard">
             <img src="${card.imgs}"></img>
